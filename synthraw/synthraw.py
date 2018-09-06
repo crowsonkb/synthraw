@@ -41,12 +41,14 @@ class DNG:
             raise DNGError('Error opening file')
 
     def set_matrix(self, matrix):
+        """Sets the XYZ to RGB color conversion matrix."""
         matrix = np.float32(matrix).flatten()
         if len(matrix) != 9:
             raise ValueError('Matrix must contain 9 values')
         lib.dng_set_matrix(self.dng, matrix)
 
     def write_data(self, data):
+        """Writes a numpy array (dtype uint16) to the DNG file."""
         if data.dtype != np.uint16:
             raise ValueError('Data must be of type uint16')
         if data.ndim != 2:
@@ -54,4 +56,5 @@ class DNG:
         lib.dng_write_data(self.dng, data, data.shape[1], data.shape[0])
 
     def close(self):
+        """Closes the DNG file."""
         lib.dng_close(self.dng)
