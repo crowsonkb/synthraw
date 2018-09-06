@@ -8,6 +8,7 @@ Installation
 
 .. code-block:: bash
 
+   pip3 install numpy pillow
    python3 setup.py install
 
 Usage
