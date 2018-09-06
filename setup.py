@@ -9,6 +9,7 @@ from setuptools.command.install import install
 
 def build_lib():
     command = ['cc', '-shared', '-fPIC', '-ltiff', 'synthraw/dng.c', '-o', 'synthraw/dng.so']
+    print('Executing:', ' '.join(command))
     subprocess.check_call(command)
 
 
