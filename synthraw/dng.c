@@ -18,6 +18,7 @@ TIFF* dng_open(char *path) {
     static const uint32_t whiteLevel[] = {65535};
 
     TIFFSetField(tiff, TIFFTAG_DNGVERSION, "\01\04\00\00");
+    TIFFSetField(tiff, TIFFTAG_DNGBACKWARDVERSION, "\01\04\00\00");
     TIFFSetField(tiff, TIFFTAG_SUBFILETYPE, 0);
     TIFFSetField(tiff, TIFFTAG_COMPRESSION, COMPRESSION_NONE);
     TIFFSetField(tiff, TIFFTAG_BITSPERSAMPLE, 16);
