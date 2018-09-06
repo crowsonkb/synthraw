@@ -48,9 +48,9 @@ class DNG:
 
     def write_data(self, data):
         if data.dtype != np.uint16:
-            raise TypeError('Data must be of type uint16')
+            raise ValueError('Data must be of type uint16')
         if data.ndim != 2:
-            raise TypeError('Data must be 2-dimensional')
+            raise ValueError('Data must be 2-dimensional')
         lib.dng_write_data(self.dng, data, data.shape[1], data.shape[0])
 
     def close(self):
