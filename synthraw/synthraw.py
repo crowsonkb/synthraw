@@ -2,13 +2,18 @@
 
 import ctypes
 from pathlib import Path
+import platform
 
 import numpy as np
 from numpy.ctypeslib import ndpointer
 
 
 lib_path = str(Path(__file__).resolve().parent / 'dng.so')
-lib = ctypes.cdll.LoadLibrary(lib_path)
+if platform.system() == 'Linux':
+    ctypes.CDLL('libtiff.so', mode=ctypes.RTLD_GLOBAL)
+    lib = ctypes.CDLL(lib_path, mode=ctypes.RTLD_GLOBAL)
+else:
+    lib = ctypes.cdll.LoadLibrary(lib_path)
 
 lib.dng_open.argtypes = [ctypes.c_char_p]
 lib.dng_open.restype = ctypes.c_void_p
