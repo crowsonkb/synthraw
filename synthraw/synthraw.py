@@ -7,7 +7,7 @@ import numpy as np
 from numpy.ctypeslib import ndpointer
 
 
-lib_path = Path(__file__).resolve().parent / 'dng.so'
+lib_path = str(Path(__file__).resolve().parent / 'dng.so')
 lib = ctypes.cdll.LoadLibrary(lib_path)
 
 lib.dng_open.argtypes = [ctypes.c_char_p]
@@ -33,7 +33,7 @@ class DNG:
     def __init__(self, path):
         self.dng = lib.dng_open(str(path).encode())
         if not self.dng:
-            raise DNGError(f'Error opening file')
+            raise DNGError('Error opening file')
 
     def set_matrix(self, matrix):
         matrix = np.float32(matrix).flatten()
